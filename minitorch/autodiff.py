@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Iterable, Tuple
+from typing import Any, Iterable, Tuple, List
 
 from typing_extensions import Protocol
 
@@ -67,10 +67,10 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
         Non-constant Variables in topological order starting from the right.
     """
     # Implement for Task 1.4.
-    order = []
+    order: List[Variable] = []
     visited = set()
 
-    def visit(v: Variable):
+    def visit(v: Variable) -> None:
         if v.unique_id in visited or v.is_constant():
             return
         if not v.is_leaf():

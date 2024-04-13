@@ -215,7 +215,7 @@ but was expecting derivative f'=%f from central difference."""
         check = central_difference(f, *scalars, arg=i)
         print(str([x.data for x in scalars]), x.derivative, i, check)
         assert x.derivative is not None
-        np.testing.assert_allclose(
+        np.testing.assert_allclose(  # type: ignore
             x.derivative,
             check.data,
             1e-2,

@@ -124,7 +124,7 @@ class Sigmoid(Function):
     @staticmethod
     def backward(ctx: Context, grad_output: Tensor) -> Tensor:
         # Implement for Task 2.4.
-        sigma = ctx.saved_values[0]
+        sigma: Tensor = ctx.saved_values[0]
         return sigma * (-sigma + 1.0) * grad_output
 
 
@@ -242,9 +242,9 @@ class Permute(Function):
     @staticmethod
     def backward(ctx: Context, grad_output: Tensor) -> Tuple[Tensor, float]:
         # Implement for Task 2.4.
-        order = ctx.saved_values[0]
+        order: Tensor = ctx.saved_values[0]
         # inverse of the permutation order
-        order2 = [
+        order2: List[int] = [
             a[0]
             for a in sorted(
                 enumerate([order[i] for i in range(order.size)]), key=lambda a: a[1]
@@ -437,7 +437,7 @@ but was expecting derivative %f from central difference.
         ind = x._tensor.sample()
         check = grad_central_difference(f, *vals, arg=i, ind=ind)
         assert x.grad is not None
-        np.testing.assert_allclose(
+        np.testing.assert_allclose(  # type: ignore
             x.grad[ind],
             check,
             1e-2,
