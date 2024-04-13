@@ -268,9 +268,16 @@ def tensor_map(fn: Callable[[float], float]) -> Any:
         in_shape: Shape,
         in_strides: Strides,
     ) -> None:
-        # TODO: Implement for Task 2.3.
-        raise NotImplementedError("Need to implement for Task 2.3")
+        # Implement for Task 2.3.
+        out_index = np.zeros(MAX_DIMS, dtype=np.int16)
+        in_index = np.zeros(MAX_DIMS, dtype=np.int16)
 
+        for i in range(len(out)):
+            to_index(i, out_shape, out_index)
+            o = index_to_position(out_index, out_strides)
+            broadcast_index(out_index, out_shape, in_shape, in_index)
+            j = index_to_position(in_index, in_strides)
+            out[o] = fn(in_storage[j])
     return _map
 
 
@@ -318,8 +325,24 @@ def tensor_zip(fn: Callable[[float, float], float]) -> Any:
         b_shape: Shape,
         b_strides: Strides,
     ) -> None:
-        # TODO: Implement for Task 2.3.
-        raise NotImplementedError("Need to implement for Task 2.3")
+        # Implement for Task 2.3.
+        out_index = np.zeros(MAX_DIMS, dtype=np.int32)
+        a_index = np.zeros(MAX_DIMS, dtype=np.int32)
+        b_index = np.zeros(MAX_DIMS, dtype=np.int32)
+        for i in range(len(out)):
+            # converts i to a multidimensional index out_index in the output shap
+            to_index(i, out_shape, out_index)
+            # position in output storage
+            o = index_to_position(out_index, out_strides)
+            # broadcasts out_index to a_shape
+            broadcast_index(out_index, out_shape, a_shape, a_index)
+            # a_index to position in a_storage
+            j = index_to_position(a_index, a_strides)
+            # broadcasts out_index to b_shape
+            broadcast_index(out_index, out_shape, b_shape, b_index)
+            # b_index to position in b_storage
+            k = index_to_position(b_index, b_strides)
+            out[o] = fn(a_storage[j], b_storage[k])
 
     return _zip
 
@@ -355,7 +378,20 @@ def tensor_reduce(fn: Callable[[float, float], float]) -> Any:
         reduce_dim: int,
     ) -> None:
         # TODO: Implement for Task 2.3.
-        raise NotImplementedError("Need to implement for Task 2.3")
+        out_index = np.zeros(MAX_DIMS, dtype=np.int32)
+        # size of dim being reduced
+        reduce_size = a_shape[reduce_dim]
+        for i in range(len(out)):
+            to_index(i, out_shape, out_index)
+            # position in output storage
+            o = index_to_position(out_index, out_strides)
+            for s in range(reduce_size):
+                out_index[reduce_dim] = s
+                # position in a_storage
+                j = index_to_position(out_index, a_strides)
+                # apply reduction function to the element at position o in the output storage
+                # and the element at position j in the storage of a.
+                out[o] = fn(out[o], a_storage[j])
 
     return _reduce
 
