@@ -108,7 +108,7 @@ class Mul(ScalarFunction):
 
     @staticmethod
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
-        (a,b) = ctx.saved_values
+        (a, b) = ctx.saved_values
         # d_output * b is the gradient of the loss with respect to a,
         # and d_output * a is the gradient of the loss with respect to b.
         return d_output * b, d_output * a
@@ -196,7 +196,7 @@ class LT(ScalarFunction):
 
     @staticmethod
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
-        (a,b) = ctx.saved_values
+        (a, b) = ctx.saved_values
         return 0.0, 0.0
 
 

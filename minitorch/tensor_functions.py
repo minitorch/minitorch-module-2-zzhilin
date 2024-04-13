@@ -252,6 +252,7 @@ class Permute(Function):
         ]
         return grad_output._new(grad_output._tensor.permute(*order2)), 0.0
 
+
 class View(Function):
     @staticmethod
     def forward(ctx: Context, a: Tensor, shape: Tensor) -> Tensor:

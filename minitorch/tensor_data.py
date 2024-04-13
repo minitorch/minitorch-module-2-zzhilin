@@ -70,7 +70,6 @@ def to_index(ordinal: int, shape: Shape, out_index: OutIndex) -> None:
         curr_ord = curr_ord // sh
 
 
-
 def broadcast_index(
     big_index: Index, big_shape: Shape, shape: Shape, out_index: OutIndex
 ) -> None:
@@ -116,7 +115,7 @@ def shape_broadcast(shape1: UserShape, shape2: UserShape) -> UserShape:
     # Implement for Task 2.2.
     a, b = shape1, shape2
     m = max(len(a), len(b))
-    c_rev = [0]*m
+    c_rev = [0] * m
     # align from rightmost dimension
     a_rev = list(reversed(a))
     b_rev = list(reversed(b))
@@ -132,6 +131,7 @@ def shape_broadcast(shape1: UserShape, shape2: UserShape) -> UserShape:
             if b_rev[i] != c_rev[i] and b_rev[i] != 1:
                 raise IndexingError(f"Cannot broadcast {a} and {b}")
     return tuple(reversed(c_rev))
+
 
 def strides_from_shape(shape: UserShape) -> UserStrides:
     layout = [1]
