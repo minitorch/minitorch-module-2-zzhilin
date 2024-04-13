@@ -21,7 +21,7 @@ class Network(minitorch.Module):
         self.layer3 = Linear(hidden_layers, 1)
 
     def forward(self, x):
-        # TODO: Implement for Task 2.5.
+        #  Implement for Task 2.5.
         raise NotImplementedError("Need to implement for Task 2.5")
 
 
@@ -33,7 +33,7 @@ class Linear(minitorch.Module):
         self.out_size = out_size
 
     def forward(self, x):
-        # TODO: Implement for Task 2.5.
+        #  Implement for Task 2.5.
         raise NotImplementedError("Need to implement for Task 2.5")
 
 
