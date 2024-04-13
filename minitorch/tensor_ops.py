@@ -377,7 +377,7 @@ def tensor_reduce(fn: Callable[[float, float], float]) -> Any:
         a_strides: Strides,
         reduce_dim: int,
     ) -> None:
-        # TODO: Implement for Task 2.3.
+        #  Implement for Task 2.3.
         out_index = np.zeros(MAX_DIMS, dtype=np.int32)
         # size of dim being reduced
         reduce_size = a_shape[reduce_dim]

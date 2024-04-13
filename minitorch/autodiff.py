@@ -22,7 +22,7 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
     Returns:
         An approximation of $f'_i(x_0, \ldots, x_{n-1})$
     """
-    # TODO: Implement for Task 1.1.
+    # Implement for Task 1.1.
     vals1 = [v for v in vals]
     vals2 = [v for v in vals]
     vals1[arg] = vals1[arg] + epsilon
@@ -66,7 +66,7 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     Returns:
         Non-constant Variables in topological order starting from the right.
     """
-    # TODO: Implement for Task 1.4.
+    # Implement for Task 1.4.
     order = []
     visited = set()
 
@@ -95,7 +95,7 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
 
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
-    # TODO: Implement for Task 1.4.
+    # Implement for Task 1.4.
     # get computational graph
     q = topological_sort(variable)
     # store computational derivatives for each variable
